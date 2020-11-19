@@ -11,8 +11,7 @@ public class YoutubeAPIService {
     private final String url;
     private RestTemplate restTemplate;
 
-    // calls the values from application.properties
-    public YoutubeAPIService(@Value("${API_KEY}") String APIKey, @Value("${YOUTUBE_URL}") String url, RestTemplate restTemplate) {
+    public YoutubeAPIService(@Value("${YOUTUBE_API_KEY}") String APIKey, @Value("${YOUTUBE_URL}") String url, RestTemplate restTemplate) {
         this.APIKey = APIKey;
         this.url = url;
         this.restTemplate = restTemplate;
