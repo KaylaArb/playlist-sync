@@ -36,6 +36,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.30.10</version>
+        </dependency>
+        <dependency>
             <groupId>se.michaelthelin.spotify</groupId>
             <artifactId>spotify-web-api-java</artifactId>
             <version>6.4.1</version>
@@ -49,12 +60,6 @@
             <groupId>org.apache.httpcomponents.core5</groupId>
             <artifactId>httpcore5</artifactId>
             <version>5.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
