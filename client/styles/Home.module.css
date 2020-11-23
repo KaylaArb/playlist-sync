@@ -49,7 +49,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .title,
@@ -112,6 +112,14 @@
 
 .logo {
   height: 1em;
+}
+
+.button {
+  margin-top: 40px;
+  padding: 15px 45px 15px 45px;
+  font-size: 30px;
+  color: white;
+  background-color: deeppink;
 }
 
 @media (max-width: 600px) {

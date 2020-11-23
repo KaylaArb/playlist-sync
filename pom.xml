@@ -46,7 +46,29 @@
             <artifactId>google-api-client</artifactId>
             <version>1.30.10</version>
         </dependency>
+        <dependency>
+            <groupId>se.michaelthelin.spotify</groupId>
+            <artifactId>spotify-web-api-java</artifactId>
+            <version>6.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.thelinmichael</groupId>
+            <artifactId>spotify-web-api-java</artifactId>
+            <version>master-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>5.0.2</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
