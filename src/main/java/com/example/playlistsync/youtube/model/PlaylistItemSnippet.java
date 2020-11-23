@@ -1,16 +1,19 @@
 package com.example.playlistsync.youtube.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PlaylistItemSnippet {
 
-    private String channelId;
-    private String channelTitle;
-    private String description;
-    private String playlistId;
-    private Long position;
-    private String publishedAt;
-    private String title;
+    String channelId;
+    String channelTitle;
+    String description;
+    String playlistId;
+    Long position;
+    String publishedAt;
+    String title;
 
 }
