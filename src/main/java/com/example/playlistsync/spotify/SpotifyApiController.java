@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SpotifyApiController {
 
-
     @GetMapping("user-top-artists")
     public Artist[] getUserTopArtists() {
         final GetUsersTopArtistsRequest getUsersTopArtistsRequest = SpotifyAuth.spotifyApi.getUsersTopArtists()
@@ -23,13 +22,6 @@ public class SpotifyApiController {
                 .build();
         try {
             final Paging<Artist> artistPaging = getUsersTopArtistsRequest.execute();
-
-//            ArrayList<Artist> artistsList = new ArrayList<Artist>();
-//            for (Artist artist: artistPaging.getItems()) {
-//                System.out.println(artist.toString());
-//                System.out.printf(artist.getId());
-//            }
-//
             return artistPaging.getItems();
         } catch (Exception e) {
             System.out.println("Something went wrong!\n" + e.getMessage());
@@ -45,14 +37,6 @@ public class SpotifyApiController {
                 .build();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-
-//            ArrayList<PlaylistSimplified> list = new ArrayList<PlaylistSimplified>();
-//            for (PlaylistSimplified playlist: playlistSimplifiedPaging.getItems()) {
-//                System.out.println(playlist.toString());
-//                System.out.printf(playlist.getId());
-//            }
-//            System.out.println("Total: " + playlistSimplifiedPaging.getTotal());
-
             return playlistSimplifiedPaging.getItems();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
