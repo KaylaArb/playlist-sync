@@ -1,17 +1,25 @@
 package com.example.playlistsync.spotify;
 
-import com.wrapper.spotify.model_objects.specification.Artist;
-import com.wrapper.spotify.model_objects.specification.Paging;
-import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+import com.example.playlistsync.spotify.authorization.SpotifyAuth;
+import com.wrapper.spotify.model_objects.special.SnapshotResult;
+import com.wrapper.spotify.model_objects.specification.*;
 import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
-import com.wrapper.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
+import com.wrapper.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
+import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
 public class SpotifyApiController {
+
+    SpotifyApiService spotifyApiService;
+
+    @Autowired
+    public void setSpotifyApiService(SpotifyApiService spotifyApiService) { this.spotifyApiService = spotifyApiService; }
 
     @GetMapping("user-top-artists")
     public Artist[] getUserTopArtists() {
@@ -29,18 +37,45 @@ public class SpotifyApiController {
         return new Artist[0];
     }
 
-    @GetMapping("user-playlist")
-    public PlaylistSimplified[] getListOfCurrentUsersPlaylists() {
-        final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = SpotifyAuth.spotifyApi.getListOfCurrentUsersPlaylists()
-//                .limit(10)
-//                .offset(0)
+    @GetMapping("add-song/{name}/{q}/{type}")
+    public String addSong(@PathVariable String name,@PathVariable String q, @PathVariable String type) {
+        String[] uris = spotifyApiService.searchSong(q,type).toArray(new String[0]);
+        String playlistId = spotifyApiService.getPlaylistId(name);
+        final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)
+//          .position(0)
                 .build();
         try {
-            final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-            return playlistSimplifiedPaging.getItems();
+            final SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();
+
+            System.out.println("Snapshot ID: " + snapshotResult.getSnapshotId());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return new PlaylistSimplified[0];
+        return "Song has been added";
+    };
+
+    /**
+     * Creates a new playlist in the authorized user's spotify account
+     * @param name
+     * @return
+     */
+    @GetMapping("create-playlist/{name}")
+    public String createPlaylist(@PathVariable String name) {
+        final CreatePlaylistRequest createPlaylistRequest = SpotifyAuth.spotifyApi.createPlaylist(spotifyApiService.getCurrentUserProfile(), name)
+//          .collaborative(false)
+//          .public_(false)
+//          .description("Amazing music.")
+                .build();
+        try {
+            final Playlist playlist = createPlaylistRequest.execute();
+            System.out.println("Name: " + playlist.getName());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "Playlist " + name + " has been created. Check your playlists. :)";
     }
+
+
 }
+
+

@@ -10,13 +10,14 @@ export default function playlists({data}) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                {data.map((playlist) => (
-                        <a>
-                            <article key={playlist.id}>
-                                {playlist.name}
-                            </article>
-                        </a>
-                ))}
+                {/*{data.map((playlist) => (*/}
+                {/*        <a>*/}
+                {/*            <article key={playlist.id}>*/}
+                {/*                {playlist.name}*/}
+                {/*            </article>*/}
+                {/*        </a>*/}
+                {/*))}*/}
+                <h1>{data}</h1>
             </main>
             <footer className={styles.footer}>
                 Developed by Kayla Arbez
@@ -27,7 +28,7 @@ export default function playlists({data}) {
 
 // this enables the page to pre-render this page and fetches data at request time
 export async function getServerSideProps() {
-    const res = await fetch(`http://localhost:8080/api/user-playlist`)
+    const res = await fetch(`http://localhost:8080/api/user-playlist/example2`)
     const data = await res.json();
 
     return {props: {data}}
