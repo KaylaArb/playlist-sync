@@ -4,6 +4,8 @@ import com.example.playlistsync.youtube.model.PageInfo;
 import com.example.playlistsync.youtube.model.PlaylistItem;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class PlaylistAPI {
     String etag;
     String nextPageToken;
     PageInfo pageInfo;
+    @Getter
     ArrayList<PlaylistItem> items;
 
     public PlaylistAPI() { this.items = new ArrayList<PlaylistItem>();}

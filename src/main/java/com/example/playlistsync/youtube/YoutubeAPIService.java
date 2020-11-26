@@ -1,8 +1,12 @@
 package com.example.playlistsync.youtube;
 
+import com.example.playlistsync.youtube.model.PlaylistItem;
+import com.example.playlistsync.youtube.model.PlaylistItemSnippet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.*;
 
 @Service
 public class YoutubeAPIService {
@@ -28,4 +32,35 @@ public class YoutubeAPIService {
         return this.url + "?playlistId=PL7Q2ZklqtR8CyOXdWk9PumZasCwi60wsl" + "&key=" + APIKey + "&part=snippet&maxResults=50";
     }
 
+    public HashMap<String, ArrayList<String>> getSongByArtistAndTitle() {
+        HashMap<String, ArrayList<String>> titleByArtist = new HashMap<String, ArrayList<String>>();
+        for (PlaylistItem playlistItem : callAPI().getItems()) {
+            String[] details = playlistItem.getSnippet().getTitle().split("-");
+            if (details.length == 2) {
+                String artist = details[0].trim();
+                if (!titleByArtist.containsKey(artist)) {
+                    titleByArtist.put(artist, new ArrayList<String>());
+                }
+                titleByArtist.get(artist).add(details[1].trim());
+            } else {
+                System.out.println("Wrong title format for: " + details[0]);
+            }
+        }
+        return titleByArtist;
+    }
+
+    public Set<String> getArtists() {
+        return getSongByArtistAndTitle().keySet();
+    }
+
+    public ArrayList<String> getSongTitle() {
+        ArrayList<String> songTitles = new ArrayList<String>();
+        HashMap<String, ArrayList<String>> titleByArtist = getSongByArtistAndTitle();
+        if (!titleByArtist.isEmpty()) {
+            for (String artist : titleByArtist.keySet()) {
+                songTitles.addAll(titleByArtist.get(artist));
+            }
+        }
+        return songTitles;
+    }
 }
