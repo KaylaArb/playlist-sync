@@ -21,19 +21,9 @@ public class YoutubeAPIController {
         return youtubeAPIService.callAPI();
     }
 
-    @GetMapping("/artists")
-    public Set<String> getArtists() {
-        return youtubeAPIService.getArtists();
-    }
-
-    @GetMapping("/song_titles")
-    public ArrayList<String> getSongTitle() {
-        return youtubeAPIService.getSongTitle();
-    }
-
     @GetMapping("/titles_by_artist")
     public HashMap<String, ArrayList<String>> getSongByArtistAndTitle() {
-        return youtubeAPIService.getSongByArtistAndTitle();
+        return youtubeAPIService.getSongsByArtistAndTitle();
     }
 
 
