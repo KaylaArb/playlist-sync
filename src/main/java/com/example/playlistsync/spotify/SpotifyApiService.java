@@ -1,6 +1,7 @@
 package com.example.playlistsync.spotify;
 
 import com.example.playlistsync.spotify.authorization.SpotifyAuth;
+import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.model_objects.special.SearchResult;
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
@@ -10,8 +11,6 @@ import com.wrapper.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylist
 import com.wrapper.spotify.requests.data.search.SearchItemRequest;
 import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 
 @Service
@@ -56,17 +55,12 @@ public class SpotifyApiService {
     public ArrayList<String> searchSong(String q, String type) {
         ArrayList<String> uri = new ArrayList<String>();
         final SearchItemRequest searchItemRequest = SpotifyAuth.spotifyApi.searchItem(q, type)
-//          .market(CountryCode.SE)
-//          .limit(10)
-//          .offset(0)
-//          .includeExternal("audio")
                 .build();
         SearchResult searchResult = null;
         try {
             searchResult = searchItemRequest.execute();
             System.out.println("Tracks: " + searchResult.getTracks().getItems());
             for (Track s : searchResult.getTracks().getItems()) {
-                System.out.println(">>>>>>>>>>>>>>>>>> " + s.getUri());
                 uri.add(s.getUri());
             }
         } catch (Exception e) {
@@ -74,6 +68,5 @@ public class SpotifyApiService {
         }
         return uri;
     };
-
 
 }

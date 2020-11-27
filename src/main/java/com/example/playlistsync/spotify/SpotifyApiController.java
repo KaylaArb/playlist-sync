@@ -1,6 +1,7 @@
 package com.example.playlistsync.spotify;
 
 import com.example.playlistsync.spotify.authorization.SpotifyAuth;
+import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.model_objects.special.SnapshotResult;
 import com.wrapper.spotify.model_objects.specification.*;
 import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
@@ -37,12 +38,11 @@ public class SpotifyApiController {
         return new Artist[0];
     }
 
-    @GetMapping("add-song/{name}/{q}/{type}")
-    public String addSong(@PathVariable String name,@PathVariable String q, @PathVariable String type) {
-        String[] uris = spotifyApiService.searchSong(q,type).toArray(new String[0]);
+    @GetMapping("add-song/{name}/{songTitle}/{type}")
+    public String addSong(@PathVariable String name, @PathVariable String songTitle, @PathVariable String type) {
+        String[] uris = spotifyApiService.searchSong(songTitle,type).toArray(new String[0]);
         String playlistId = spotifyApiService.getPlaylistId(name);
         final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)
-//          .position(0)
                 .build();
         try {
             final SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();
@@ -62,9 +62,6 @@ public class SpotifyApiController {
     @GetMapping("create-playlist/{name}")
     public String createPlaylist(@PathVariable String name) {
         final CreatePlaylistRequest createPlaylistRequest = SpotifyAuth.spotifyApi.createPlaylist(spotifyApiService.getCurrentUserProfile(), name)
-//          .collaborative(false)
-//          .public_(false)
-//          .description("Amazing music.")
                 .build();
         try {
             final Playlist playlist = createPlaylistRequest.execute();
@@ -74,8 +71,6 @@ public class SpotifyApiController {
         }
         return "Playlist " + name + " has been created. Check your playlists. :)";
     }
-
-
 }
 
 
