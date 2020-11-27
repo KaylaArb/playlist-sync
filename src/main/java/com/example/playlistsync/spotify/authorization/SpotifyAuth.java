@@ -1,9 +1,8 @@
-package com.example.playlistsync.spotify;
+package com.example.playlistsync.spotify.authorization;
 
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.SpotifyHttpManager;
 import lombok.Data;
-
 import java.net.URI;
 
 @Data
@@ -19,4 +18,5 @@ public class SpotifyAuth {
             .setClientSecret(clientSecret)
             .setRedirectUri(redirectUri)
             .build();
+
 }
