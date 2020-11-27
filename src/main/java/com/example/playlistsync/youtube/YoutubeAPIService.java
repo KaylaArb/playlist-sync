@@ -1,7 +1,6 @@
 package com.example.playlistsync.youtube;
 
 import com.example.playlistsync.youtube.model.PlaylistItem;
-import com.example.playlistsync.youtube.model.PlaylistItemSnippet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +29,7 @@ public class YoutubeAPIService {
     }
 
     public String buildURL() {
-        return this.url + "?playlistId=PL7Q2ZklqtR8CyOXdWk9PumZasCwi60wsl" + "&key=" + APIKey + "&part=snippet&maxResults=50";
+        return this.url + "?playlistId=PL7Q2ZklqtR8B_EAUfXt5tAZkxhCApfFkL" + "&key=" + APIKey + "&part=snippet&maxResults=50";
     }
 
     public HashMap<String, ArrayList<String>> getSongsByArtistAndTitle() {
@@ -41,7 +40,7 @@ public class YoutubeAPIService {
                 String artist = title[0].trim();
                 String[] song = title[1].split(Pattern.quote("("));
                 String[] songEdit = song[0].split(Pattern.quote("["));
-                if (!artistAndSongsList.containsKey(artist)){
+                if (!artistAndSongsList.containsKey(artist)) {
                     ArrayList<String> songs = new ArrayList<String>();
                     songs.add(songEdit[0].trim());
                     artistAndSongsList.put(artist, songs);
