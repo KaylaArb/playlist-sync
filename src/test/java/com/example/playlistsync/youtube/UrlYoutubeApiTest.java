@@ -16,7 +16,7 @@ public class UrlYoutubeApiTest {
     @Test
     public void checkURLTest() {
         String expectedURL= "https://youtube.googleapis.com/youtube/v3/playlistItems?playlistId=PL7Q2ZklqtR8CyOXdWk9PumZasCwi60wsl&key=AIzaSyBgPvC12sylwDME_RhDUIE9gF2hMwik3aQ&part=snippet&maxResults=50";
-        assertEquals(expectedURL, youtubeAPIService.buildURL(), "Must return " + expectedURL);
+        assertEquals(expectedURL, youtubeAPIService.buildURL(null), "Must return " + expectedURL);
     }
 
 }
