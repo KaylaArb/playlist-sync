@@ -1,6 +1,7 @@
 package com.example.playlistsync.youtube;
 
 import com.example.playlistsync.youtube.model.PlaylistItem;
+import com.example.playlistsync.youtube.model.PlaylistItemSnippet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

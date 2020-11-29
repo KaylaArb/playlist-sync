@@ -1,7 +1,7 @@
 package com.example.playlistsync.spotify;
 
 import com.example.playlistsync.spotify.authorization.SpotifyAuth;
-import com.wrapper.spotify.SpotifyApi;
+import com.example.playlistsync.youtube.YoutubeAPIService;
 import com.wrapper.spotify.model_objects.special.SnapshotResult;
 import com.wrapper.spotify.model_objects.specification.*;
 import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -21,6 +23,11 @@ public class SpotifyApiController {
 
     @Autowired
     public void setSpotifyApiService(SpotifyApiService spotifyApiService) { this.spotifyApiService = spotifyApiService; }
+
+    YoutubeAPIService youtubeAPIService;
+
+    @Autowired
+    public void setYoutubeAPIService(YoutubeAPIService youtubeAPIService) { this.youtubeAPIService = youtubeAPIService; }
 
     @GetMapping("user-top-artists")
     public Artist[] getUserTopArtists() {
@@ -37,22 +44,6 @@ public class SpotifyApiController {
         }
         return new Artist[0];
     }
-
-    @GetMapping("add-song/{name}/{songTitle}/{type}")
-    public String addSong(@PathVariable String name, @PathVariable String songTitle, @PathVariable String type) {
-        String[] uris = spotifyApiService.searchSong(songTitle,type).toArray(new String[0]);
-        String playlistId = spotifyApiService.getPlaylistId(name);
-        final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)
-                .build();
-        try {
-            final SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();
-
-            System.out.println("Snapshot ID: " + snapshotResult.getSnapshotId());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        return "Song has been added";
-    };
 
     /**
      * Creates a new playlist in the authorized user's spotify account
@@ -71,6 +62,28 @@ public class SpotifyApiController {
         }
         return "Playlist " + name + " has been created. Check your playlists. :)";
     }
+
+    /**
+     * Adds songs from youtube into a specific spotify playlist
+     * @param playlistName
+     * @return
+     */
+    @GetMapping("add-songs/{playlistName}")
+    public String addSongs(@PathVariable String playlistName) {
+        HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle();
+        String[] uris = spotifyApiService.searchSong(getPlaylist).toArray(new String[0]);
+        String playlistId = spotifyApiService.getPlaylistId(playlistName);
+        final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)
+                .build();
+        try {
+            final SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();
+            System.out.println("Snapshot ID: " + snapshotResult.getSnapshotId());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "Songs have been added";
+    };
+
 }
 
 
