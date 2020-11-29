@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 @RestController
 public class YoutubeAPIController {
@@ -16,15 +15,9 @@ public class YoutubeAPIController {
     @Autowired
     public void setYoutubeAPIService(YoutubeAPIService youtubeAPIService) { this.youtubeAPIService = youtubeAPIService; }
 
-    @GetMapping("/playlist")
-    public PlaylistAPI callAPI() {
-        return youtubeAPIService.callAPI();
-    }
-
     @GetMapping("/titles_by_artist")
     public HashMap<String, ArrayList<String>> getSongByArtistAndTitle() {
         return youtubeAPIService.getSongsByArtistAndTitle();
     }
-
 
 }
