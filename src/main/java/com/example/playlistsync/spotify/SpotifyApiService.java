@@ -16,18 +16,16 @@ import java.util.HashMap;
 @Service
 public class SpotifyApiService {
 
-    public String getCurrentUserProfile() {
-        String result = null;
+    public User getCurrentUserProfile() {
         final GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = SpotifyAuth.spotifyApi.getCurrentUsersProfile()
                 .build();
         try {
             final User user = getCurrentUsersProfileRequest.execute();
-            System.out.println("Display name: " + user.getId());
-            result = user.getId();
+            return user;
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return result;
+        return null;
     }
 
     public String getPlaylistId(String name) {
@@ -49,7 +47,7 @@ public class SpotifyApiService {
         return result;
     }
 
-    public ArrayList<String> searchSong(HashMap<String, ArrayList<String>> titles) {
+    public ArrayList<String> searchSongs(HashMap<String, ArrayList<String>> titles) {
         ArrayList<String> uri = new ArrayList<String>();
         titles.forEach((k, v) -> {
             for (String song: v) {

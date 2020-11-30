@@ -1,0 +1,30 @@
+.container {
+    width: 25vw;
+    height: auto;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    margin: 25px;
+    background-color: white;
+}
+
+.listContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.listContainer h1{
+    margin: 15px;
+    color: #4F4F51;
+    font-size: 2em;
+}
+
+.listContainer p{
+    font-size: 18px;
+}
+
+.listContainer ol{
+    margin: 0;
+}

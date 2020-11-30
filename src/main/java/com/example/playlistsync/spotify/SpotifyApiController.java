@@ -7,6 +7,7 @@ import com.wrapper.spotify.model_objects.specification.*;
 import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import com.wrapper.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
+import com.wrapper.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/spotify")
 public class SpotifyApiController {
 
     SpotifyApiService spotifyApiService;
@@ -28,6 +29,11 @@ public class SpotifyApiController {
 
     @Autowired
     public void setYoutubeAPIService(YoutubeAPIService youtubeAPIService) { this.youtubeAPIService = youtubeAPIService; }
+
+    @GetMapping("user")
+    public User getCurrentUserProfile() {
+        return spotifyApiService.getCurrentUserProfile();
+    }
 
     @GetMapping("user-top-artists")
     public Artist[] getUserTopArtists() {
@@ -45,6 +51,20 @@ public class SpotifyApiController {
         return new Artist[0];
     }
 
+    @GetMapping("user-playlists")
+    public PlaylistSimplified[] getListOfCurrentUsersPlaylists() {
+        final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = SpotifyAuth.spotifyApi.getListOfCurrentUsersPlaylists()
+                .build();
+        try {
+            final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
+            return playlistSimplifiedPaging.getItems();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return new PlaylistSimplified[0];
+    }
+
+
     /**
      * Creates a new playlist in the authorized user's spotify account
      * @param name
@@ -52,7 +72,8 @@ public class SpotifyApiController {
      */
     @GetMapping("create-playlist/{name}")
     public String createPlaylist(@PathVariable String name) {
-        final CreatePlaylistRequest createPlaylistRequest = SpotifyAuth.spotifyApi.createPlaylist(spotifyApiService.getCurrentUserProfile(), name)
+        String user = spotifyApiService.getCurrentUserProfile().getDisplayName();
+        final CreatePlaylistRequest createPlaylistRequest = SpotifyAuth.spotifyApi.createPlaylist(user, name)
                 .build();
         try {
             final Playlist playlist = createPlaylistRequest.execute();
@@ -60,7 +81,7 @@ public class SpotifyApiController {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return "Playlist " + name + " has been created. Check your playlists. :)";
+        return user + ", playlist " + name + " has been created. Check your playlists. :)";
     }
 
     /**
@@ -71,7 +92,7 @@ public class SpotifyApiController {
     @GetMapping("add-songs/{playlistName}")
     public String addSongs(@PathVariable String playlistName) {
         HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle();
-        String[] uris = spotifyApiService.searchSong(getPlaylist).toArray(new String[0]);
+        String[] uris = spotifyApiService.searchSongs(getPlaylist).toArray(new String[0]);
         String playlistId = spotifyApiService.getPlaylistId(playlistName);
         final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)
                 .build();
