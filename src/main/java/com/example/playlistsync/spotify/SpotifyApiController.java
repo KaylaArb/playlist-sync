@@ -81,7 +81,7 @@ public class SpotifyApiController {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return user + ", playlist " + name + " has been created. Check your playlists. :)";
+        return name + " has been created. Check your playlists. :)";
     }
 
     /**

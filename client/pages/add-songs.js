@@ -71,13 +71,13 @@ export async function getServerSideProps() {
 
 function createPlaylist() {
     let result = "";
-        let value = document.getElementById("id-input").value;
-        console.log("Value = " + value)
-        fetch("http://localhost:8080/spotify/create-playlist/" + value)
-            .then((response) => response.text())
-            .then( response => {
-                result = response;
-            })
+    let value = document.getElementById("id-input").value;
+    console.log("Value = " + value)
+    fetch("http://localhost:8080/spotify/create-playlist/" + value)
+        .then((response) => response.text())
+        .then( response => {
+            result = response;
+        })
     console.log("results :" + result)
     return result;
 }

@@ -1,10 +1,11 @@
 .container {
-    width: 25vw;
-    height: auto;
+    width: 35vw;
+    height: 550px;
     border: 1px solid #eaeaea;
     border-radius: 10px;
     margin: 25px;
     background-color: white;
+    overflow:auto;
 }
 
 .listContainer {
@@ -27,4 +28,24 @@
 
 .listContainer ol{
     margin: 0;
+    width:75%;
+}
+
+.container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.container::-webkit-scrollbar-track {
+    border: 1px solid #D6D6D6;
+    border-radius: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #F58F7C;
+    border-radius: 10px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: #F2C4CE;
 }
