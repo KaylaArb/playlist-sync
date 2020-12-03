@@ -7,6 +7,7 @@ import PlaylistBox from '../components/PlaylistBox.js';
 import Router from 'next/router'
 
 export default function Dashboard({artists, user, playlists}) {
+
     const [visible, setVisible] = useState(false);
     const [playlistName, setPlaylistName] = useState(null);
 
@@ -69,17 +70,21 @@ export async function getServerSideProps() {
     return {props: {artists, user, playlists}}
 }
 
+// gets value from id-input inputs and fetches the backend function createPlaylist
 function createPlaylist() {
     let result = "";
         let value = document.getElementById("id-input").value;
-        console.log("Value = " + value)
-        fetch("http://localhost:8080/spotify/create-playlist/" + value)
-            .then((response) => response.text())
-            .then( response => {
-                result = response;
-            })
-    console.log("results :" + result)
-    return result;
+        if (value) {
+            fetch("http://localhost:8080/spotify/create-playlist/" + value)
+                .then((response) => response.text())
+                .then( response => {
+                    result = response;
+                })
+            return result
+        } else {
+            alert("Make sure to enter a playlist name.")
+            return null;
+        }
 }
 
 

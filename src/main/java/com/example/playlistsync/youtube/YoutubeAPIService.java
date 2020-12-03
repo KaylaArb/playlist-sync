@@ -22,33 +22,33 @@ public class YoutubeAPIService {
         this.restTemplate = restTemplate;
     }
 
-    private PlaylistAPI callAPI(String pageToken) {
-        String url = buildURL(pageToken);
+    private PlaylistAPI callAPI(String pageToken, String youtubeId) {
+        String url = buildURL(pageToken, youtubeId);
         System.out.println(url);
         PlaylistAPI playlistAPI = restTemplate.getForObject( url, PlaylistAPI.class);
         return playlistAPI;
     }
 
-    private ArrayList<PlaylistItem> getPlaylist(){
-        ArrayList<PlaylistItem> playlist = new ArrayList<PlaylistItem>();
-        PlaylistAPI playlistAPI = callAPI(null);
+    private ArrayList<PlaylistItem> getPlaylist(String youtubeId){
+        ArrayList<PlaylistItem> playlist = new ArrayList<>();
+        PlaylistAPI playlistAPI = callAPI(null, youtubeId);
         playlist.addAll(playlistAPI.getItems());
         while (playlistAPI.getNextPageToken() != null) {
-            playlistAPI = callAPI(playlistAPI.getNextPageToken());
+            playlistAPI = callAPI(playlistAPI.getNextPageToken(), youtubeId);
             playlist.addAll(playlistAPI.getItems());
         }
         System.out.println("Size of playlist = " + playlist.size());
         return playlist;
     }
 
-    public String buildURL(String pageToken) {
-        String url = this.url + "?playlistId=PL05E1623111A9A860" + "&key=" + APIKey + "&part=snippet&maxResults=50";
+    public String buildURL(String pageToken, String youtubeId) {
+        String url = this.url + "?playlistId=" + youtubeId + "&key=" + APIKey + "&part=snippet&maxResults=50";
         return pageToken == null ? url : url + "&pageToken=" + pageToken;
     }
 
-    public HashMap<String, ArrayList<String>> getSongsByArtistAndTitle() {
-        HashMap<String, ArrayList<String>> artistAndSongsList = new HashMap<String, ArrayList<String>>();
-        for (PlaylistItem playlist : getPlaylist()) {
+    public HashMap<String, ArrayList<String>> getSongsByArtistAndTitle(String youtubeId) {
+        HashMap<String, ArrayList<String>> artistAndSongsList = new HashMap<>();
+        for (PlaylistItem playlist : getPlaylist(youtubeId)) {
             String[] title = playlist.getSnippet().getTitle().split("-");
             if (title.length == 2) {
                 String artist = title[0].trim();

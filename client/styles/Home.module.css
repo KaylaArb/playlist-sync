@@ -1,3 +1,4 @@
+/*controls-styles the entire page display*/
 .container {
   min-height: 100vh;
   display: flex;
@@ -5,6 +6,7 @@
   background-color: #D6D6D6;
 }
 
+/*controls the body display*/
 .main {
   padding: 2rem 0.5rem;
   flex: 1;
@@ -15,17 +17,20 @@
   text-align: center;
 }
 
+/*styles the h1 tag*/
 .main h1 {
   color: white;
   font-size: 3.5em;
   margin:0;
 }
 
+/*styles the h2 tag*/
 .main h2 {
   color: white;
   font-size: 2em;
 }
 
+/*styles the main button*/
 .button {
   color: white;
   width: 250px;
@@ -49,6 +54,7 @@
   margin:0;
 }
 
+/*controls the height and width of footer*/
 .footer {
   width: 100%;
   height: 125px;
@@ -56,6 +62,7 @@
   border-top: 1px solid #eaeaea;
 }
 
+/*styles the content inside the footer*/
 .footer .content {
   display: flex;
   flex-direction: column;
@@ -64,14 +71,14 @@
   padding: 20px;
 }
 
-.content p {
+.footer .content p {
   color: #4F4F51;
   font-size: 16px;
   font-weight: bold;
   margin-top: 0;
 }
 
-.content .logo {
+.footer .content .logo {
   height: 55px;
   width: auto;
 }

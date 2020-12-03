@@ -89,9 +89,10 @@ public class SpotifyApiController {
      * @param playlistName
      * @return
      */
-    @GetMapping("add-songs/{playlistName}")
-    public String addSongs(@PathVariable String playlistName) {
-        HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle();
+    @GetMapping("add-songs/{playlistName}/{youtubeId}")
+    public String addSongs(@PathVariable String playlistName, @PathVariable String youtubeId) {
+        System.out.println("It ran!");
+        HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle(youtubeId);
         String[] uris = spotifyApiService.searchSongs(getPlaylist).toArray(new String[0]);
         String playlistId = spotifyApiService.getPlaylistId(playlistName);
         final AddItemsToPlaylistRequest addItemsToPlaylistRequest = SpotifyAuth.spotifyApi.addItemsToPlaylist(playlistId, uris)

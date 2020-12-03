@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -28,6 +27,7 @@ export default function Home() {
   )
 }
 
+// returns the url to redirect user to authorize their Spotify account
 const getSpotifyUserLogin = () => {
     fetch("http://localhost:8080/api/login")
         .then((response) => response.text())
