@@ -1,27 +1,33 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <Head>
+            <title>Welcome!</title>
+            <link rel="icon" href="/icon.svg" />
+        </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to my simple application. Please sign into spotify
-        </h1>
-        <button type="button" className={styles.button} onClick={getSpotifyUserLogin}> Sign In </button>
+          <h1>
+              Welcome to my simple application.
+          </h1>
+          <h2>
+              Please sign into spotify to sync your playlists.
+          </h2>
+          <button type="button" className={styles.button} onClick={getSpotifyUserLogin}><p>Sign into Spotify</p></button>
       </main>
-      <footer className={styles.footer}>
-          Developed by Kayla Arbez
-      </footer>
+        <footer className={styles.footer}>
+            <div className={styles.content}>
+                <p>Developed by Kayla Arbez</p>
+                <img src='/icon.svg' className={styles.logo}/>
+            </div>
+        </footer>
     </div>
   )
 }
 
+// returns the url to redirect user to authorize their Spotify account
 const getSpotifyUserLogin = () => {
     fetch("http://localhost:8080/api/login")
         .then((response) => response.text())

@@ -15,9 +15,9 @@ public class YoutubeAPIController {
     @Autowired
     public void setYoutubeAPIService(YoutubeAPIService youtubeAPIService) { this.youtubeAPIService = youtubeAPIService; }
 
-    @GetMapping("/titles_by_artist")
-    public HashMap<String, ArrayList<String>> getSongByArtistAndTitle() {
-        return youtubeAPIService.getSongsByArtistAndTitle();
-    }
+//    @GetMapping("/titles_by_artist")
+//    public HashMap<String, ArrayList<String>> getSongByArtistAndTitle() {
+//        return youtubeAPIService.getSongsByArtistAndTitle();
+//    }
 
 }

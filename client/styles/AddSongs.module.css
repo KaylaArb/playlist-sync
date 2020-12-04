@@ -1,0 +1,203 @@
+/*controls-styles the entire page display*/
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #D6D6D6;
+}
+
+/*styles the h1 tag*/
+.container h1 {
+    color: white;
+    font-size: 3.5em;
+    margin-bottom: 0;
+}
+
+/*controls the body display*/
+.main {
+    padding: 0 0.5rem 2rem 0.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*controls the height and width of footer*/
+.footer {
+    width: 100%;
+    height: 125px;
+    background-color: white;
+    border-top: 1px solid #eaeaea;
+}
+
+/*styles the content inside the footer*/
+.footer .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer .content p {
+    color: #4F4F51;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.footer .content .logo {
+    height: 55px;
+    width: auto;
+}
+
+/*contains the input bars, labels and instructions*/
+.inputContainer {
+    display: flex;
+    height: 125px;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0 0 0px;
+}
+
+/*styles the container hosting the label for the input bars*/
+.inputContainer .label {
+    width: 150px;
+    height: 100%;
+    padding-top: 5px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/*styles the container hosting the input bars and instructions*/
+.inputContainer .input {
+    width: 500px;
+    height: 100%;
+}
+
+/*contains the submit and back button*/
+.buttonsContainer {
+    margin-top: 25px;
+}
+
+/*styles the input bars*/
+.searchInput {
+    width: 500px;
+    height: 40px;
+    padding: 10px 15px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+}
+/*styles the trigger button to add a youtube playlist to a spotify playlist*/
+.submitButton{
+    width: auto;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    height: 50px;
+    cursor: pointer;
+    background-color: #F58F7C;
+    border: 1px solid #aaaaaa;
+    border-left: none;
+    border-radius: 5px;
+    padding: 0 25px;
+    margin-right: 25px;
+}
+
+/*styles the back button to user dashboard*/
+.backButton {
+    width: auto;
+    color: #F58F7C;
+    font-weight: 600;
+    font-size: 18px;
+    height: 50px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #aaaaaa;
+    border-left: none;
+    border-radius: 5px;
+    padding: 0 25px;
+    margin-left: 25px;
+}
+
+/*contains the close button on the modal*/
+.closeContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/*styles the modal close button*/
+.closeContainer .close {
+    color: white;
+    font-size: 28px;
+    height: 40px;
+    font-weight: bold;
+    background-color: #D6D6D6;
+    border: none;
+    transition-duration: 0.3s;
+    padding: 0 15px;
+}
+
+.closeContainer .close:hover{
+    color: white;
+    background-color: #F58F7C;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*styles the background, position behind the modal box*/
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal.open {
+    display: block;
+}
+
+/*styles the entire modal box*/
+.modalBox {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/*styles the content inside the modal box*/
+.modalContent {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: auto;
+    width: auto;
+    height: 275px;
+    background-color: #fefefe;
+    padding: 30px 60px 20px 60px;
+    border: 1px solid #888;
+}
+
+/*styles the text inside the modal*/
+.modalContent p {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+}
+
+/*styles the spotify link*/
+.modalContent a {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #1DB954;
+    padding-top: 15px;
+    text-decoration: underline;
+}
