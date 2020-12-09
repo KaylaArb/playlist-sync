@@ -17,6 +17,14 @@ export default function Dashboard({artists, user, playlists}) {
         Router.reload(window.location.pathname);
     }
 
+    let reset = () => {
+        setPlaylistName(null);
+    }
+
+    let timerId = () => {
+        setTimeout(reset, 6000);
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -42,6 +50,7 @@ export default function Dashboard({artists, user, playlists}) {
                             </div>
                             <div className={`${styles.messageContainer} ${playlistName !== null ? styles.open : ''}`}>
                                 <p>The playlist was created!</p>
+                                {timerId()}
                             </div>
                             <div className={styles.closeContainer}>
                                 <button className={styles.close} onClick={handleClick}>Close</button>

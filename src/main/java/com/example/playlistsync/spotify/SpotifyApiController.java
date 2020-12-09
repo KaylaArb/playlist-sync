@@ -2,8 +2,10 @@ package com.example.playlistsync.spotify;
 
 import com.example.playlistsync.spotify.authorization.SpotifyAuth;
 import com.example.playlistsync.youtube.YoutubeAPIService;
+import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.special.SnapshotResult;
 import com.wrapper.spotify.model_objects.specification.*;
+import com.wrapper.spotify.requests.data.follow.legacy.UnfollowPlaylistRequest;
 import com.wrapper.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import com.wrapper.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -91,7 +95,6 @@ public class SpotifyApiController {
      */
     @GetMapping("add-songs/{playlistName}/{youtubeId}")
     public String addSongs(@PathVariable String playlistName, @PathVariable String youtubeId) {
-        System.out.println("It ran!");
         HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle(youtubeId);
         String[] uris = spotifyApiService.searchSongs(getPlaylist).toArray(new String[0]);
         String playlistId = spotifyApiService.getPlaylistId(playlistName);
@@ -105,6 +108,21 @@ public class SpotifyApiController {
         }
         return "Songs have been added";
     };
+
+    @GetMapping("delete-playlist/{playlistId}")
+    public String deletePlaylist(@PathVariable String playlistId) {
+        String ownerId = spotifyApiService.getCurrentUserProfile().getId();
+        UnfollowPlaylistRequest unfollowPlaylistRequest = SpotifyAuth.spotifyApi.unfollowPlaylist(ownerId, playlistId)
+                .build();
+
+        try {
+            final String string = unfollowPlaylistRequest.execute();
+            System.out.println("Null: " + string);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "sucess";
+    }
 
 }
 
