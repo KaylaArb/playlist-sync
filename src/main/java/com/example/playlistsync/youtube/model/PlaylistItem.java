@@ -13,5 +13,4 @@ public class PlaylistItem {
     String kind;
     PlaylistItemSnippet snippet;
 
-
 }

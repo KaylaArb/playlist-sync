@@ -24,6 +24,7 @@ export default function PlaylistBox({playlists}) {
     );
 }
 
+// call the Delete-playlist endpoint
 function deletePlaylist(id) {
     let result = null;
     fetch("http://localhost:8080/spotify/delete-playlist/" + id)
