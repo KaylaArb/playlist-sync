@@ -1,7 +1,6 @@
 package com.example.playlistsync.youtube;
 
 import com.example.playlistsync.youtube.model.PlaylistItem;
-import com.example.playlistsync.youtube.model.PlaylistItemSnippet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,11 +13,13 @@ public class YoutubeAPIService {
 
     private final String APIKey;
     private final String url;
+    private final String youtubeFilter;
     private RestTemplate restTemplate;
 
-    public YoutubeAPIService(@Value("${YOUTUBE_API_KEY}") String APIKey, @Value("${YOUTUBE_URL}") String url, RestTemplate restTemplate) {
+    public YoutubeAPIService(@Value("${YOUTUBE_API_KEY}") String APIKey, @Value("${YOUTUBE_URL}") String url,@Value("${YOUTUBE_FILTER}") String youtubeFilter, RestTemplate restTemplate) {
         this.APIKey = APIKey;
         this.url = url;
+        this.youtubeFilter = youtubeFilter;
         this.restTemplate = restTemplate;
     }
 
@@ -42,7 +43,7 @@ public class YoutubeAPIService {
     }
 
     public String buildURL(String pageToken, String youtubeId) {
-        String url = this.url + "?playlistId=" + youtubeId + "&key=" + APIKey + "&part=snippet&maxResults=50";
+        String url = this.url + "?playlistId=" + youtubeId + "&key=" + APIKey + youtubeFilter;
         return pageToken == null ? url : url + "&pageToken=" + pageToken;
     }
 

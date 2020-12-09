@@ -92,18 +92,20 @@ function addPlaylist() {
             })
         return result;
     } else {
-        alert("Make sure both fields are filled.");
+        alert("Make sure both fields are filled and the youtube URL is a playlist. It should contain a '&list='.");
         return null;
     }
 }
 
-// filters the youtube URL to return the playlist ID only
+// ensures youtubeURL has '&list=' and then filters the youtube URL to return the playlist ID only
 function splitYoutubeUrl() {
     let youtubeUrl = document.getElementById("youtubeUrl").value;
-    if (youtubeUrl) {
+    if (youtubeUrl.includes("&list=")) {
         let splitUrl = youtubeUrl.split("&list=")
         let result = splitUrl[1].split("&index")
         return result[0];
+    } else {
+        return null;
     }
 }
 
