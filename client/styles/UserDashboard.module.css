@@ -120,6 +120,7 @@
     background-color: #fefefe;
     padding: 30px 60px 20px 60px;
     border: 1px solid #888;
+    border-radius: 5px;
 }
 
 /*contains the input and submit button*/
@@ -189,4 +190,17 @@
 
 .messageContainer.open {
     display: block;
+    animation: FadeAnimation 1s ease-in .2s forwards;
+}
+
+@keyframes FadeAnimation {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

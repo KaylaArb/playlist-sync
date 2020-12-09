@@ -5,7 +5,7 @@ export default function ArtistBox({artists}) {
         <div className={styles.container}>
             <div className={styles.listContainer}>
                 <h1>Top 10 Artists</h1>
-                <ol>
+                <ol className={styles.artists}>
                     {artists.map((artist) => (
                         <li key={artist.id}>
                             <p>

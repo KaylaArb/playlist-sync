@@ -14,6 +14,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    padding: 0 10px;
 }
 
 .listContainer h1{
@@ -22,13 +23,29 @@
     font-size: 2em;
 }
 
-.listContainer p{
+
+.listContainer .playlists{
     font-size: 18px;
+    text-align: left;
+    width:85%;
 }
 
-.listContainer ol{
+.listContainer .playlists p{
+    padding-left: 10px;
+}
+
+.listContainer button{
+   float: right;
+    color: white;
+    background-color: #ff4d4d;
+    border: none;
+    font-size: 16px;
+}
+
+.listContainer .artists{
     margin: 0;
     width:75%;
+    font-size: 18px;
 }
 
 .container::-webkit-scrollbar {

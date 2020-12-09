@@ -46,6 +46,7 @@
 .button:hover {
   background-color: white;
   color: #F58F7C;
+  border: none;
 }
 
 .button p {
