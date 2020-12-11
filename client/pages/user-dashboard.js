@@ -79,21 +79,25 @@ export async function getServerSideProps() {
     return {props: {artists, user, playlists}}
 }
 
-// gets value from id-input inputs and fetches the backend function createPlaylist
 function createPlaylist() {
     let result = "";
-        let value = document.getElementById("id-input").value;
-        if (value) {
-            fetch("http://localhost:8080/spotify/create-playlist/" + value)
-                .then((response) => response.text())
-                .then( response => {
-                    result = response;
-                })
-            return result
-        } else {
-            alert("Make sure to enter a playlist name.")
-            return null;
-        }
+    let value = document.getElementById("id-input").value;
+    document.getElementById("id-input").value = "";
+    if (value) {
+        fetch("http://localhost:8080/spotify/create-playlist", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'},
+            body: value})
+            .then((response) => response.text())
+            .then( response => {
+                result = response
+                return result
+            })
+    } else {
+        alert('Make sure to enter a playlist name.')
+        return null;
+    }
 }
 
 
