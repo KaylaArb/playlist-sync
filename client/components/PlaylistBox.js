@@ -27,11 +27,15 @@ export default function PlaylistBox({playlists}) {
 // call the Delete-playlist endpoint
 function deletePlaylist(id) {
     let result = null;
-    fetch("http://localhost:8080/spotify/delete-playlist/" + id)
+    fetch("http://localhost:8080/spotify/delete-playlist", {
+        method: 'DELETE',
+        headers: {'Content-Type': 'text/plain'},
+        body: id})
             .then((response) => response.text())
             .then( response => {
                 result = response;
                 return (result !== null ? Router.reload(window.location.pathname) : alert("The playlist could not be deleted."));
             })
 }
+
 

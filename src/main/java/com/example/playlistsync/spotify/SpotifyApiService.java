@@ -107,7 +107,8 @@ public class SpotifyApiService {
         return new PlaylistSimplified[0];
     }
 
-    public String createPlaylist(@PathVariable String name) {
+    public String createPlaylist(String name) {
+        System.out.println(">>>>> "+name);
         String user = getCurrentUserProfile().getDisplayName();
         final CreatePlaylistRequest createPlaylistRequest = SpotifyAuth.spotifyApi.createPlaylist(user, name)
                 .build();
@@ -117,10 +118,10 @@ public class SpotifyApiService {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return name + " has been created. Check your playlists. :)";
+        return "success";
     }
 
-    public String addSongs(@PathVariable String playlistName, @PathVariable String youtubeId) {
+    public String addSongs(String playlistName, String youtubeId) {
         HashMap<String, ArrayList<String>> getPlaylist = youtubeAPIService.getSongsByArtistAndTitle(youtubeId);
         String[] uris = searchSongs(getPlaylist).toArray(new String[0]);
         String playlistId = getPlaylistId(playlistName);

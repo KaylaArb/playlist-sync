@@ -85,11 +85,14 @@ function addPlaylist() {
     let youtubeUrl = splitYoutubeUrl();
     let spotifyPlaylist = document.getElementById("spotifyPlaylist").value;
     if(youtubeUrl && spotifyPlaylist) {
-        fetch("http://localhost:8080/spotify/add-songs/" + spotifyPlaylist +"/" + youtubeUrl)
+        fetch("http://localhost:8080/spotify/add-songs", {
+            method: 'POST',
+            body: JSON.stringify({spotifyPlaylist: spotifyPlaylist, youtubeUrl: youtubeUrl})})
             .then((response) => response.text())
             .then( response => {
                 result = response;
             })
+        console.log(result);
         return result;
     } else {
         alert("Make sure both fields are filled and the youtube URL is a playlist. It should contain a '&list='.");
@@ -108,6 +111,8 @@ function splitYoutubeUrl() {
         return null;
     }
 }
+
+
 
 
 
