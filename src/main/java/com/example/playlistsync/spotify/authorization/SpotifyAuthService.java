@@ -36,7 +36,7 @@ public class SpotifyAuthService {
         } catch (IOException | SpotifyWebApiException | org.apache.hc.core5.http.ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        response.sendRedirect("http://localhost:3000/user-dashboard");
+        response.sendRedirect("https://playlist-sync-demo.herokuapp.com/user-dashboard");
         System.out.println("access token: " + SpotifyAuth.spotifyApi.getAccessToken());
         return SpotifyAuth.spotifyApi.getAccessToken();
     }
