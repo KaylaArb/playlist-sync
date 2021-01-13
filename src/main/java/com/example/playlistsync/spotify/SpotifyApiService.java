@@ -133,7 +133,7 @@ public class SpotifyApiService {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return "Songs have been added";
+        return "success";
     }
 
     public String deletePlaylist(@PathVariable String playlistId) {

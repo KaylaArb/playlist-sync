@@ -20,7 +20,7 @@ export default function Home() {
         <footer className={styles.footer}>
             <div className={styles.content}>
                 <p>Developed by Kayla Arbez</p>
-                <img src='/icon.svg' className={styles.logo}/>
+                <img src='/icon.png' className={styles.logo}/>
             </div>
         </footer>
     </div>
