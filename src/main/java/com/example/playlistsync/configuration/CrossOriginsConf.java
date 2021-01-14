@@ -10,7 +10,9 @@ public class CrossOriginsConf implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://playlist-sync-demo.herokuapp.com")
+                .allowedOrigins("http://localhost:3000")
+                .allowedHeaders("http://localhost:3000")
+                .allowedHeaders("https://playlist-sync-demo.herokuapp.com")
                 .allowedHeaders("https://playlist-sync-demo.herokuapp.com")
                 .allowedMethods("*");
 
