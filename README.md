@@ -2,7 +2,7 @@
 ## About The Project
 
 <div align="center">
-<img src="src/main/resources/static/screenshot.png" width="50%" height="50%">
+<img src="src/main/resources/static/screenshot.png" width="65%" height=auto>
 </div>
 <br>
 
@@ -28,4 +28,4 @@ A simple application built to practice integrating external APIs.
 
 Kayla Arbez  - kaarbez@gmail.com
 
-Project Link: [https://github.com/KaylaArb/nwHacks-jigMap](https://github.com/KaylaArb/nwHacks-jigMap)
+Project Link: [https://github.com/KaylaArb/playlist-sync](https://github.com/KaylaArb/playlist-sync)
