@@ -2,7 +2,7 @@
 ## About The Project
 
 <div align="center">
-<img src="src/main/resources/static/screenshot.png" width=auto height="75%">
+<img src="src/main/resources/static/screenshot.png" width="50%" height="50%">
 </div>
 <br>
 
