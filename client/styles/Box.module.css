@@ -17,12 +17,11 @@
     padding: 0 10px;
 }
 
-.listContainer h1{
+.boxTitle{
     margin: 15px;
-    color: #4F4F51;
-    font-size: 2em;
+    color: #4F4F51 !important;
+    font-size: 1.5em;
 }
-
 
 .listContainer .playlists{
     font-size: 18px;
@@ -35,11 +34,13 @@
 }
 
 .listContainer button{
-   float: right;
+    float: right;
     color: white;
     background-color: #ff4d4d;
     border: none;
     font-size: 16px;
+    outline:none;
+    cursor: pointer;
 }
 
 .listContainer .artists{

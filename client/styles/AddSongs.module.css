@@ -61,6 +61,7 @@
     justify-content: center;
     align-items: center;
     margin: 30px 0 0 0px;
+    outline:none;
 }
 
 /*styles the container hosting the label for the input bars*/
@@ -91,6 +92,7 @@
     border: 1px solid #aaaaaa;
     border-radius: 5px;
     background-color: white;
+    outline:none;
 }
 /*styles the trigger button to add a youtube playlist to a spotify playlist*/
 .submitButton{
@@ -106,6 +108,7 @@
     border-radius: 5px;
     padding: 0 25px;
     margin-right: 25px;
+    outline:none;
 }
 
 /*styles the back button to user dashboard*/
@@ -122,6 +125,7 @@
     border-radius: 5px;
     padding: 0 25px;
     margin-left: 25px;
+    outline:none;
 }
 
 /*contains the close button on the modal*/

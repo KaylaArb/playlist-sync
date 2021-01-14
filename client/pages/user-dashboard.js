@@ -32,7 +32,7 @@ export default function Dashboard({artists, user, playlists}) {
                 <link rel="icon" href="/icon.svg" />
             </Head>
             <main className={styles.main}>
-                <h1>Howdy {user.displayName}!</h1>
+                <h1 className={styles.userTitle}>Howdy {user.displayName}!</h1>
                 <div className={styles.buttons}>
                     <button className={styles.button} onClick={() => setVisible(true)}><p>Create a Playlist</p></button>
                     <Link href="/add-songs"><button className={styles.button}><p>Add songs to a Playlist</p></button></Link>
@@ -62,7 +62,7 @@ export default function Dashboard({artists, user, playlists}) {
             <footer className={styles.footer}>
                 <div className={styles.content}>
                     <p>Developed by Kayla Arbez</p>
-                    <img src='/icon.svg' className={styles.logo}/>
+                    <img src='/icon.png' className={styles.logo}/>
                 </div>
             </footer>
         </div>
@@ -72,9 +72,9 @@ export default function Dashboard({artists, user, playlists}) {
 // this enables to pre-render this page and fetches data at request time
 export async function getServerSideProps() {
     const [artists, user, playlists] = await Promise.all([
-        fetch(`http://localhost:8080/spotify/user-top-artists`).then(r => r.json()),
-        fetch(`http://localhost:8080/spotify/user`).then(r => r.json()),
-        fetch(`http://localhost:8080/spotify/user-playlists`).then(r => r.json())
+        fetch(`https://playlist-sync-backend.herokuapp.com/spotify/user-top-artists`).then(r => r.json()),
+        fetch(`https://playlist-sync-backend.herokuapp.com/spotify/user`).then(r => r.json()),
+        fetch(`https://playlist-sync-backend.herokuapp.com/spotify/user-playlists`).then(r => r.json())
     ])
     return {props: {artists, user, playlists}}
 }
@@ -84,7 +84,7 @@ function createPlaylist() {
     let value = document.getElementById("id-input").value;
     document.getElementById("id-input").value = "";
     if (value) {
-        fetch("http://localhost:8080/spotify/create-playlist", {
+        fetch("https://playlist-sync-backend.herokuapp.com/spotify/create-playlist", {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain'},

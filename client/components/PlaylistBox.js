@@ -6,7 +6,7 @@ export default function PlaylistBox({playlists}) {
     return (
         <div className={styles.container}>
             <div className={styles.listContainer}>
-                <h1>Current Playlists</h1>
+                <h1 className={styles.boxTitle}>Your Current Playlists</h1>
                 <ol className={styles.playlists}>
                     {playlists.map((playlist) => (
                         <li key={playlist.id}>
@@ -27,15 +27,15 @@ export default function PlaylistBox({playlists}) {
 // call the Delete-playlist endpoint
 function deletePlaylist(id) {
     let result = null;
-    fetch("http://localhost:8080/spotify/delete-playlist", {
+    fetch("https://playlist-sync-backend.herokuapp.com/spotify/delete-playlist", {
         method: 'DELETE',
         headers: {'Content-Type': 'text/plain'},
         body: id})
-            .then((response) => response.text())
-            .then( response => {
-                result = response;
-                return (result !== null ? Router.reload(window.location.pathname) : alert("The playlist could not be deleted."));
-            })
+        .then((response) => response.text())
+        .then( response => {
+            result = response;
+            return (result !== null ? Router.reload(window.location.pathname) : alert("The playlist could not be deleted."));
+        })
 }
 
 

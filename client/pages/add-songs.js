@@ -63,7 +63,7 @@ export default function Dashboard({user, playlists}) {
             <footer className={styles.footer}>
                 <div className={styles.content}>
                     <p>Developed by Kayla Arbez</p>
-                    <img src='/icon.svg' className={styles.logo}/>
+                    <img src='/icon.png' className={styles.logo}/>
                 </div>
             </footer>
         </div>
@@ -73,8 +73,8 @@ export default function Dashboard({user, playlists}) {
 // this enables to pre-render this page and fetches data at request time
 export async function getServerSideProps() {
     const [user, playlists] = await Promise.all([
-        fetch(`http://localhost:8080/spotify/user`).then(r => r.json()),
-        fetch(`http://localhost:8080/spotify/user-playlists`).then(r => r.json())
+        fetch(`https://playlist-sync-backend.herokuapp.com/spotify/user`).then(r => r.json()),
+        fetch(`https://playlist-sync-backend.herokuapp.com/spotify/user-playlists`).then(r => r.json())
     ])
     return {props: {user, playlists}}
 }
@@ -85,7 +85,7 @@ function addPlaylist() {
     let youtubeUrl = splitYoutubeUrl();
     let spotifyPlaylist = document.getElementById("spotifyPlaylist").value;
     if(youtubeUrl && spotifyPlaylist) {
-        fetch("http://localhost:8080/spotify/add-songs", {
+        fetch("https://playlist-sync-backend.herokuapp.com/spotify/add-songs", {
             method: 'POST',
             body: JSON.stringify({spotifyPlaylist: spotifyPlaylist, youtubeUrl: youtubeUrl})})
             .then((response) => response.text())

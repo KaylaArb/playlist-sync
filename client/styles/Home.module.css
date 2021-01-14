@@ -41,6 +41,7 @@
   transition-duration: 0.4s;
   border: 1px solid #eaeaea;
   cursor: pointer;
+  outline:none;
 }
 
 .button:hover {

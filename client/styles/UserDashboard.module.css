@@ -17,7 +17,7 @@
 }
 
 /*styles the h1 tag*/
-.main h1 {
+.userTitle {
     color: white;
     font-size: 3.5em;
 }
@@ -39,6 +39,7 @@
     transition-duration: 0.4s;
     border: 1px solid #eaeaea;
     cursor: pointer;
+    outline:none;
 }
 
 .buttons .button:hover {
@@ -138,6 +139,7 @@
     border: 1px solid #aaaaaa;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    outline:none;
 }
 
 /*styles the submit button*/
@@ -153,6 +155,7 @@
     border-left: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    outline:none;
 }
 
 /*contains the modal close button*/
@@ -172,6 +175,7 @@
     border: none;
     transition-duration: 0.3s;
     padding: 0 15px;
+    outline:none;
 }
 
 .closeContainer .close:hover{
